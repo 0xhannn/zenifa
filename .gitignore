@@ -20,9 +20,12 @@ static/uploads/
 uploads/
 
 # Backups (per-version snapshots)
-*.v6*_*.html
-*.v6*.tar.gz
+*_v6*.html
+*.v*_*.html
+*.v*_safe.html
+*.v*.tar.gz
 .v*.bak
+*.tar.gz
 
 # OS
 .DS_Store
