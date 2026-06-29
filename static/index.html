@@ -1390,6 +1390,19 @@
             <script>
             // Detail-page uploader (mirrors /tasks list version). Global so inline onchange= works.
             window._pendingFiles = window._pendingFiles || {};
+            // Mark existing img/file for removal (matches /tasks list behavior — v1.1)
+            window.markRemoveImg = function(btn){
+                var wrap = btn.closest('.existing-img');
+                if(!wrap) return;
+                var id = wrap.closest('[id^="task-existing-"]').id.replace('task-existing-','');
+                wrap.remove();
+                var imgs = Array.from(document.querySelectorAll('#task-existing-' + id + ' .existing-img')).map(function(el){return el.dataset.path;});
+                var names = Array.from(document.querySelectorAll('#task-existing-' + id + ' .existing-img')).map(function(el){return el.dataset.name || el.dataset.path.split('/').pop();});
+                var input = document.getElementById('task-existing-input-' + id);
+                if(input) input.value = JSON.stringify(imgs);
+                var inputN = document.getElementById('task-existing-names-input-' + id);
+                if(inputN) inputN.value = JSON.stringify(names);
+            };
             window.appendPendingFiles = function(key, files){
                 window._pendingFiles[key] = window._pendingFiles[key] || [];
                 for(var i=0;i<files.length;i++) window._pendingFiles[key].push(files[i]);
