@@ -769,6 +769,25 @@
                 <button type="button" onclick="clearTaskBulk()" class="text-gray-400 hover:text-white text-sm px-3 py-2">Batal</button>
             </div>
 
+            <!-- Task status filter (runs for both anon and admin) -->
+            <script>
+            (function(){
+                document.querySelectorAll('.task-filter-btn').forEach(function(btn){
+                    btn.addEventListener('click', function(){
+                        var s = btn.dataset.taskFilter;
+                        document.querySelectorAll('.task-filter-btn').forEach(function(b){b.classList.remove('bg-white','text-black');b.classList.add('bg-gray-700','text-gray-300');});
+                        btn.classList.add('bg-white','text-black');btn.classList.remove('bg-gray-700','text-gray-300');
+                        var visible = 0;
+                        document.querySelectorAll('.task-card').forEach(function(card){
+                            if(s==='all' || card.dataset.status===s){card.style.display='';visible++;}
+                            else{card.style.display='none';}
+                        });
+                        document.getElementById('task-visible-count').textContent = visible;
+                    });
+                });
+            })();
+            </script>
+
             {% if pin_ok %}
             <script>
             (function(){
@@ -797,19 +816,6 @@
                     document.querySelectorAll('.task-bulk-check:checked').forEach(function(c){c.checked=false;});
                     updateTaskBulk();
                 };
-                document.querySelectorAll('.task-filter-btn').forEach(function(btn){
-                    btn.addEventListener('click', function(){
-                        var s = btn.dataset.taskFilter;
-                        document.querySelectorAll('.task-filter-btn').forEach(function(b){b.classList.remove('bg-white','text-black');b.classList.add('bg-gray-700','text-gray-300');});
-                        btn.classList.add('bg-white','text-black');btn.classList.remove('bg-gray-700','text-gray-300');
-                        var visible = 0;
-                        document.querySelectorAll('.task-card').forEach(function(card){
-                            if(s==='all' || card.dataset.status===s){card.style.display='';visible++;}
-                            else{card.style.display='none';}
-                        });
-                        document.getElementById('task-visible-count').textContent = visible;
-                    });
-                });
             })();
 
             // Pending files accumulator: native input.files REPLACES on each pick.
