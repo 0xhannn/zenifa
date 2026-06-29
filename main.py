@@ -78,6 +78,36 @@ def _delete_r2_objects(urls: list[str]):
     except Exception as e:
         print('R2 delete failed:', e)
 
+
+def _delete_removed_files(old_urls: list[str], new_urls: list[str]):
+    """Diff old vs new: delete anything in old but not in new from R2 (URL) or local fs."""
+    new_set = set(new_urls or [])
+    removed = [u for u in (old_urls or []) if u and u not in new_set]
+    if not removed:
+        return
+    # 1. R2 URLs → batch delete
+    r2_urls = [u for u in removed if u.startswith('http://') or u.startswith('https://')]
+    if r2_urls:
+        try:
+            _delete_r2_objects(r2_urls)
+        except Exception as e:
+            print('R2 delete error:', e)
+    # 2. Local paths (relative like uploads/tasks/xxx.webp) → unlink
+    for u in removed:
+        if u.startswith(('http://', 'https://')):
+            continue
+        # Strip leading slash, resolve to absolute
+        rel = u.lstrip('/')
+        if not rel or rel.startswith('static/') or '..' in rel:
+            continue
+        full = os.path.join(BASE_DIR, rel)
+        try:
+            if os.path.isfile(full):
+                os.remove(full)
+                print(f'Deleted local file: {full}')
+        except Exception as e:
+            print(f'Local delete failed for {u}: {e}')
+
 def _compress_image(file_path: str, max_width: int = 1600, quality: int = 82):
     """In-place: resize + convert to .webp beside original. Removes original if ext differs. Returns new rel-path or None."""
     try:
@@ -115,7 +145,7 @@ app = FastAPI()
 from starlette.middleware.sessions import SessionMiddleware
 import secrets as _secrets
 ADMIN_PIN = os.environ.get('ZENIFA_PIN', 'zenifa2026')
-APP_VERSION = "v1.0"
+APP_VERSION = "v1.1"
 
 @app.get("/__health__", include_in_schema=False)
 def __health__():
@@ -481,6 +511,14 @@ async def task_update(request: Request, task_id: int,
     if guard: return guard
     if not _pin_ok(request):
         return RedirectResponse(url="/pin?next=/tasks", status_code=303)
+    # v1.1: fetch old URLs BEFORE update so we can diff + delete removed files
+    conn = get_db()
+    row = conn.execute('SELECT result_files FROM tasks WHERE id=?', (task_id,)).fetchone()
+    try:
+        old_urls = json.loads(row['result_files'] or '[]') if row else []
+    except Exception:
+        old_urls = []
+
     saved = _save_task_images(result_files)
     keep = _parse_existing_images(existing_images)
     keep_names = _parse_existing_names(existing_images_names)
@@ -504,7 +542,6 @@ async def task_update(request: Request, task_id: int,
     else:
         existing_names = [os.path.basename(k) for k in keep]
     all_names = json.dumps(existing_names + pre_names + saved_names)
-    conn = get_db()
     conn.execute(
         'UPDATE tasks SET title=?, category=?, link=?, status=?, notes=?, result=?, result_files=?, result_files_names=? WHERE id=?',
         (title.strip(), category.strip(), link.strip(), status,
@@ -512,6 +549,14 @@ async def task_update(request: Request, task_id: int,
     )
     conn.commit()
     conn.close()
+
+    # v1.1: cleanup removed files from R2 + local fs
+    new_urls = keep + pre + saved_urls
+    try:
+        _delete_removed_files(old_urls, new_urls)
+    except Exception as e:
+        print(f'Cleanup error: {e}')
+
     return RedirectResponse(url="/tasks", status_code=303)
 
 
