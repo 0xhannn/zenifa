@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.env
+
+# Database (runtime state)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Uploads (user content)
+static/files/
+static/uploads/
+uploads/
+
+# Backups (per-version snapshots)
+*.v6*_*.html
+*.v6*.tar.gz
+.v*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
