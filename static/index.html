@@ -729,49 +729,7 @@
                                 <span class="text-[10px] text-gray-500 uppercase tracking-widest font-bold ml-auto"><i class="far fa-calendar-alt mr-1"></i>{{ t.created_at }}</span>
                             </div>
                             <h3 class="font-bold text-white text-base sm:text-lg mb-1 break-words"><a href="/task/{{ t.id }}" target="_blank" rel="noopener" class="hover:text-blue-300 transition">{{ t.title }}<i class="fas fa-arrow-up-right-from-square text-[10px] text-gray-500 ml-1.5 align-baseline"></i></a></h3>
-                            {% if t.notes %}<p class="text-gray-400 text-xs sm:text-sm mb-2 break-words">{{ t.notes }}</p>{% endif %}
                             {% if t.link %}<a href="{{ t.link }}" target="_blank" rel="noopener" class="inline-flex items-center text-xs text-blue-400 hover:text-blue-300 transition mb-2 break-all"><i class="fas fa-link mr-1.5"></i>{{ t.link }}</a>{% endif %}
-
-                            {% if t.result or t.result_files_list %}
-                            <div class="mt-3 pt-3 border-t border-gray-700/50">
-                                <p class="text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-1.5"><i class="fas fa-flag-checkered mr-1"></i>Hasil</p>
-                                {% if t.result %}<p class="text-gray-300 text-xs sm:text-sm mb-2 break-words whitespace-pre-line">{{ t.result }}</p>{% endif %}
-                                {% if t.result_files_list %}
-                                <div class="flex flex-wrap gap-2">
-                                    {% for img in t.result_files_list %}
-                                    {% set fname = img.split('/')[-1] %}
-                                    {% set ext = fname.rsplit('.', 1)[-1]|lower if '.' in fname else '' %}
-                                    {% set _url = img if img.startswith('http') or img.startswith('/') else '/' + img %}
-                                    {% set _orig = t.result_files_names_list[loop.index0] if t.result_files_names_list and loop.index0 < t.result_files_names_list|length else fname %}
-                                    {% if ext in ['jpg','jpeg','png','webp','gif'] %}
-                                    <div class="relative group">
-                                        <a href="{{ _url }}" target="_blank" rel="noopener" class="block w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-gray-700 hover:border-white transition" title="{{ _orig }}">
-                                            <img src="{{ _url }}" alt="{{ _orig }}" class="w-full h-full object-cover">
-                                        </a>
-                                        <button type="button" onclick="openRenameFile({{ t.id }}, {{ loop.index0 }}, '{{ _orig|e }}')" class="absolute top-0 left-0 bg-black/70 text-white w-5 h-5 text-[10px] flex items-center justify-center rounded-br-lg opacity-0 group-hover:opacity-100 transition" title="Rename display name"><i class="fas fa-pen"></i></button>
-                                    </div>
-                                    {% elif ext == 'pdf' %}
-                                    <div class="relative group flex items-center gap-2 bg-gray-900 border border-gray-700 hover:border-white rounded-lg pl-2.5 pr-8 py-1.5 text-xs text-gray-300 hover:text-white transition max-w-[220px]">
-                                        <a href="{{ _url }}" target="_blank" rel="noopener" class="flex items-center gap-2 flex-1 min-w-0" title="{{ _orig }}">
-                                            <i class="fas fa-file-pdf text-red-400"></i>
-                                            <span class="truncate">{{ _orig }}</span>
-                                        </a>
-                                        <button type="button" onclick="openRenameFile({{ t.id }}, {{ loop.index0 }}, '{{ _orig|e }}')" class="absolute right-1 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white p-1" title="Rename display name"><i class="fas fa-pen text-[10px]"></i></button>
-                                    </div>
-                                    {% else %}
-                                    <div class="relative group flex items-center gap-2 bg-gray-900 border border-gray-700 hover:border-white rounded-lg pl-2.5 pr-8 py-1.5 text-xs text-gray-300 hover:text-white transition max-w-[220px]">
-                                        <a href="{{ _url }}" target="_blank" rel="noopener" class="flex items-center gap-2 flex-1 min-w-0">
-                                            <i class="fas fa-file text-gray-400"></i>
-                                            <span class="truncate">{{ _orig }}</span>
-                                        </a>
-                                        <button type="button" onclick="openRenameFile({{ t.id }}, {{ loop.index0 }}, '{{ _orig|e }}')" class="absolute right-1 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white p-1" title="Rename display name"><i class="fas fa-pen text-[10px]"></i></button>
-                                    </div>
-                                    {% endif %}
-                                    {% endfor %}
-                                </div>
-                                {% endif %}
-                            </div>
-                            {% endif %}
 
                             <!-- Quick status switcher -->
                             <div class="{% if not pin_ok %}hidden{% endif %} flex flex-wrap gap-1.5 mt-3">
