@@ -82,6 +82,7 @@
       html[data-theme="light"] .text-gray-500 { color: #6b6b6b !important; }
       html[data-theme="light"] .text-gray-200 { color: #2e2e2e !important; }
       html[data-theme="light"] .text-gray-100 { color: #1a1a1a !important; }
+      html[data-theme="light"] .zen-admin-label { color: rgba(107,114,128,0.9) !important; }
       /* .text-black intentionally NOT flipped — used in colored badges where black text is correct */
 
       /* === BORDER REMAP === */
@@ -526,7 +527,7 @@
                         <button type="submit" class="zen-switch is-on" aria-label="Admin mode active, click to logout">
                             <span class="zen-switch-knob"></span>
                         </button>
-                        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.5);margin-top:2px;text-align:center">Admin</div>
+                        <div class="zen-admin-label" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;text-align:center">Admin</div>
                     </form>
                     {% else %}
                     <div class="zen-pin-wrap" data-mode="off" data-next="{{ request.path }}">
@@ -534,7 +535,7 @@
                         <button type="button" class="zen-switch zen-pin-trigger" title="Login admin" aria-label="Click to login as admin">
                             <span class="zen-switch-knob"></span>
                         </button>
-                        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.5);margin-top:2px;text-align:center">Admin</div>
+                        <div class="zen-admin-label" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;text-align:center">Admin</div>
                         </div>
                         <form method="post" action="/pin" class="zen-pin-pop" autocomplete="off">
                             <input type="hidden" name="next" value="{{ request.path }}">
@@ -566,7 +567,7 @@
                     <button type="submit" class="zen-switch zen-switch-sm is-on" title="Logout admin" aria-label="Admin mode active, click to logout">
                         <span class="zen-switch-knob"></span>
                     </button>
-                    <div style="font-size:8px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,0.5);text-align:center;margin-top:1px">Admin</div>
+                    <div class="zen-admin-label" style="font-size:8px;font-weight:700;text-transform:uppercase;text-align:center;margin-top:1px">Admin</div>
                 </form>
                 {% else %}
                 <div class="zen-pin-wrap zen-pin-wrap-sm" data-mode="off" data-next="{{ request.path }}">
@@ -574,7 +575,7 @@
                     <button type="button" class="zen-switch zen-switch-sm zen-pin-trigger" title="Login admin" aria-label="Click to login as admin">
                         <span class="zen-switch-knob"></span>
                     </button>
-                    <div style="font-size:8px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,0.5);text-align:center;margin-top:1px">Admin</div>
+                    <div class="zen-admin-label" style="font-size:8px;font-weight:700;text-transform:uppercase;text-align:center;margin-top:1px">Admin</div>
                     </div>
                     <form method="post" action="/pin" class="zen-pin-pop zen-pin-pop-sm" autocomplete="off">
                         <input type="hidden" name="next" value="{{ request.path }}">
