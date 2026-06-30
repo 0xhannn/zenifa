@@ -1520,7 +1520,7 @@
                 <h1 class="text-3xl font-bold mb-2">{{ 'In Work' if menu == 'inwork' else 'Finished Projects' }}</h1>
                 <p class="text-gray-400">Total: <span class="text-white font-bold">{{ designs|length }}</span> items</p>
             </div>
-            {% if menu == 'inwork' %}
+            {% if menu == 'inwork' and pin_ok %}
             <button id="zenNewEntryBtn" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg border border-gray-700 text-sm transition cursor-pointer">
                 <i class="fas fa-plus mr-1"></i> New Entry
             </button>
@@ -1568,12 +1568,14 @@
                                             <i class="fas fa-eye"></i>
                                         </button>
                                         {% endif %}
+                                        {% if pin_ok %}
                                         <a href="/edit/{{ shoe.id }}" class="bg-orange-500 hover:bg-orange-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-transform transform hover:scale-110">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="/delete/{{ shoe.id }}" class="bg-red-500/90 hover:bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-transform transform hover:scale-110" onclick="return confirm('Hapus desain ini?')">
                                             <i class="fas fa-trash-can"></i>
                                         </a>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="p-5">
@@ -1639,12 +1641,14 @@
                                             <i class="fas fa-eye"></i>
                                         </button>
                                         {% endif %}
+                                        {% if pin_ok %}
                                         <a href="/edit/{{ shoe.id }}" class="bg-orange-500 hover:bg-orange-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-transform transform hover:scale-110">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="/delete/{{ shoe.id }}" class="bg-red-500/90 hover:bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-transform transform hover:scale-110" onclick="return confirm('Hapus desain ini?')">
                                             <i class="fas fa-trash-can"></i>
                                         </a>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="p-5">
@@ -1720,12 +1724,14 @@
                                             <i class="fas fa-eye"></i>
                                         </button>
                                         {% endif %}
+                                        {% if pin_ok %}
                                         <a href="/edit/{{ shoe.id }}" class="bg-orange-500 hover:bg-orange-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-transform transform hover:scale-110">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="/delete/{{ shoe.id }}" class="bg-red-500/90 hover:bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-transform transform hover:scale-110" onclick="return confirm('Hapus desain ini?')">
                                             <i class="fas fa-trash-can"></i>
                                         </a>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="p-5">
@@ -1791,8 +1797,10 @@
             </div>
             <div class="absolute top-1 right-1 z-20 flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 <button type="button" onclick="event.stopPropagation();openLightbox('/{{ d.image_path }}','{{ d.model_name|e }}')" class="bg-blue-500/95 hover:bg-blue-600 text-white w-9 h-9 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-lg" title="Lihat gambar"><i class="fas fa-eye text-xs"></i></button>
+                {% if pin_ok %}
                 <a href="/edit/{{ d.id }}" onclick="event.stopPropagation();event.preventDefault();window.location.href='/edit/{{ d.id }}'" class="bg-white/95 hover:bg-white text-black w-9 h-9 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-lg" title="Edit"><i class="fas fa-edit text-xs"></i></a>
                 <a href="#" onclick="event.stopPropagation();event.preventDefault();deletePdfImage({{ d.id }}, this)" class="bg-red-500/95 hover:bg-red-600 text-white w-9 h-9 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-lg" title="Hapus"><i class="fas fa-times text-sm"></i></a>
+                {% endif %}
             </div>
             <div class="absolute inset-0 bg-black/60 opacity-0 peer-checked:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                 <i class="fas fa-check-circle text-white text-3xl sm:text-4xl drop-shadow-lg"></i>
