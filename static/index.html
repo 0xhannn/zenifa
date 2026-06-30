@@ -537,20 +537,20 @@
                         <i class="fas fa-file-pdf mr-1"></i> Gallery
                     </a>
                     {% if pin_ok %}
-                    <form method="post" action="/pin/logout" class="inline" title="Logout admin">
+                    <form method="post" action="/pin/logout" title="Logout admin" class="flex flex-col items-center gap-0">
                         <button type="submit" class="zen-switch is-on" aria-label="Admin mode active, click to logout">
-                            <span class="zen-switch-label zen-switch-label-on">Admin</span>
-                            <span class="zen-switch-label zen-switch-label-off">Public</span>
                             <span class="zen-switch-knob"></span>
                         </button>
+                        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.5);margin-top:2px;text-align:center">Admin</div>
                     </form>
                     {% else %}
                     <div class="zen-pin-wrap" data-mode="off" data-next="{{ request.path }}">
+                        <div class="flex flex-col items-center gap-0">
                         <button type="button" class="zen-switch zen-pin-trigger" title="Login admin" aria-label="Click to login as admin">
-                            <span class="zen-switch-label zen-switch-label-on">Admin</span>
-                            <span class="zen-switch-label zen-switch-label-off">Public</span>
                             <span class="zen-switch-knob"></span>
                         </button>
+                        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.5);margin-top:2px;text-align:center">Admin</div>
+                        </div>
                         <form method="post" action="/pin" class="zen-pin-pop" autocomplete="off">
                             <input type="hidden" name="next" value="{{ request.path }}">
                             <input type="password" name="pin" class="zen-pin-input" placeholder="•••" autocomplete="current-password" inputmode="numeric" pattern="[0-9]*" minlength="3" required maxlength="32" aria-label="PIN">
@@ -577,20 +577,20 @@
             </div>
             <div class="flex items-center gap-3">
                 {% if pin_ok %}
-                <form method="post" action="/pin/logout">
+                <form method="post" action="/pin/logout" title="Logout admin" class="flex flex-col items-center gap-0">
                     <button type="submit" class="zen-switch zen-switch-sm is-on" title="Logout admin" aria-label="Admin mode active, click to logout">
-                        <span class="zen-switch-label zen-switch-label-on">A</span>
-                        <span class="zen-switch-label zen-switch-label-off">P</span>
                         <span class="zen-switch-knob"></span>
                     </button>
+                    <div style="font-size:8px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,0.5);text-align:center;margin-top:1px">Admin</div>
                 </form>
                 {% else %}
                 <div class="zen-pin-wrap zen-pin-wrap-sm" data-mode="off" data-next="{{ request.path }}">
+                    <div class="flex flex-col items-center gap-0">
                     <button type="button" class="zen-switch zen-switch-sm zen-pin-trigger" title="Login admin" aria-label="Click to login as admin">
-                        <span class="zen-switch-label zen-switch-label-on">A</span>
-                        <span class="zen-switch-label zen-switch-label-off">P</span>
                         <span class="zen-switch-knob"></span>
                     </button>
+                    <div style="font-size:8px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,0.5);text-align:center;margin-top:1px">Admin</div>
+                    </div>
                     <form method="post" action="/pin" class="zen-pin-pop zen-pin-pop-sm" autocomplete="off">
                         <input type="hidden" name="next" value="{{ request.path }}">
                         <input type="password" name="pin" class="zen-pin-input zen-pin-input-sm" placeholder="•••" autocomplete="current-password" inputmode="numeric" pattern="[0-9]*" minlength="3" required maxlength="32" aria-label="PIN">
