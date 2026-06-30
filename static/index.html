@@ -355,7 +355,7 @@
     </style>
 
     <style>
-      /* ===== Zenifa v1.4: Footer fix + nav alignment — knob-only + Admin label below/Public Switch ===== */
+      /* ===== Zenifa v1.5: Floating add modal on inwork: Footer fix + nav alignment — knob-only + Admin label below/Public Switch ===== */
       .zen-switch {
         position: relative;
         display: inline-flex;
@@ -1528,9 +1528,9 @@
                 <h1 class="text-3xl font-bold mb-2">{{ 'In Work' if menu == 'inwork' else 'Finished Projects' }}</h1>
                 <p class="text-gray-400">Total: <span class="text-white font-bold">{{ designs|length }}</span> items</p>
             </div>
-            <a href="/add" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg border border-gray-700 text-sm transition">
+            <button id="zenNewEntryBtn" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg border border-gray-700 text-sm transition cursor-pointer">
                 <i class="fas fa-plus mr-1"></i> New Entry
-            </a>
+            </button>
         </header>
 
         <!-- Status-based Sliders -->
@@ -2348,6 +2348,30 @@ document.querySelectorAll('.zen-pin-wrap').forEach(function(wrap){
     m.addEventListener('click', function(ev){ if (ev.target === m) close(); });
     document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape' && !m.hidden) close(); });
 })();
+
+/* New Entry modal */
+(function(){
+    var overlay = document.getElementById('zenAddModalOverlay');
+    var btn = document.getElementById('zenNewEntryBtn');
+    var closeBtn = document.getElementById('zenAddModalClose');
+    var cancelBtn = document.getElementById('zenAddCancel');
+    var form = document.getElementById('zenAddForm');
+    function open() { if (overlay) overlay.hidden = false; }
+    function close() { if (overlay) overlay.hidden = true; }
+    if (btn) btn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (cancelBtn) cancelBtn.addEventListener('click', close);
+    if (overlay) {
+        overlay.addEventListener('click', function(e){ if (e.target === overlay) close(); });
+        document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !overlay.hidden) close(); });
+    }
+    if (form) {
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            fetch('/add', {method:'POST', body:new FormData(form)}).then(function(){ close(); location.reload(); });
+        });
+    }
+})();
 </script>
 
 <style>
@@ -2430,7 +2454,60 @@ document.querySelectorAll('.zen-pin-wrap').forEach(function(wrap){
     transition: background 150ms ease;
   }
   .zen-modal-close:hover { background: rgba(255,255,255,0.15); }
+
+  /* Floating Add Modal */
+  .zen-add-modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200; padding: 16px;
+  }
+  .zen-add-modal[hidden] { display: none !important; }
+  .zen-add-modal-content {
+    width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
+    background: #111827;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.9);
+  }
 </style>
+
+<!-- Floating Add Form Modal -->
+<div class="zen-add-modal" id="zenAddModalOverlay" hidden>
+  <div class="zen-add-modal-content">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-bold text-white"><i class="fas fa-plus-circle mr-2"></i>New Entry</h2>
+      <button type="button" id="zenAddModalClose" class="text-gray-400 hover:text-white text-xl leading-none cursor-pointer">&times;</button>
+    </div>
+    <form id="zenAddForm" action="/add" method="post" enctype="multipart/form-data">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Model Name</label>
+          <input type="text" name="model_name" required placeholder="e.g. Air Tomket v1" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 focus:ring-2 focus:ring-white outline-none transition text-white">
+        </div>
+        <div>
+          <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Production Status</label>
+          <select name="status" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 focus:ring-2 focus:ring-white outline-none transition text-white appearance-none">
+            <option value="draft">Draft</option>
+            <option value="proses">Proses</option>
+            <option value="finish">Finish</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Design Asset (Optional)</label>
+          <input type="file" name="image" accept="image/*" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-gray-200 hover:file:bg-gray-600 transition cursor-pointer">
+        </div>
+      </div>
+      <div class="mt-4 flex gap-3">
+        <button type="submit" class="flex-1 bg-white hover:bg-gray-200 text-black font-bold py-3 rounded-xl transition-all active:scale-95"><i class="fas fa-save mr-2"></i>Save</button>
+        <button type="button" id="zenAddCancel" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl transition-all active:scale-95">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 </body>
 
 

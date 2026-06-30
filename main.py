@@ -145,7 +145,7 @@ app = FastAPI()
 from starlette.middleware.sessions import SessionMiddleware
 import secrets as _secrets
 ADMIN_PIN = os.environ.get('ZENIFA_PIN', 'zenifa2026')
-APP_VERSION = "v1.4"
+APP_VERSION = "v1.5"
 
 @app.get("/__health__", include_in_schema=False)
 def __health__():
@@ -1279,3 +1279,4 @@ async def welcome(request: Request):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8080)
+
