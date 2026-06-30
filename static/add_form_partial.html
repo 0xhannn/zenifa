@@ -1,0 +1,33 @@
+<!-- Add Design Form — partial for modal injection -->
+<section class="bg-gray-800 p-6 rounded-2xl shadow-2xl border border-gray-700">
+    <form id="zenAddFormModal" action="/add" method="post" enctype="multipart/form-data">
+        <div class="space-y-4">
+            <div>
+                <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Model Name</label>
+                <input type="text" name="model_name" required placeholder="e.g. Air Tomket v1"
+                    class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 focus:ring-2 focus:ring-white outline-none transition text-white">
+            </div>
+            <div>
+                <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Production Status</label>
+                <select name="status" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 focus:ring-2 focus:ring-white outline-none transition text-white appearance-none">
+                    <option value="draft">Draft</option>
+                    <option value="proses">Proses</option>
+                    <option value="finish">Finish</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Design Asset (Optional)</label>
+                <input type="file" name="image"
+                    class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-gray-200 hover:file:bg-gray-600 transition cursor-pointer">
+            </div>
+        </div>
+        <div class="mt-4 flex gap-3">
+            <button type="submit" class="flex-1 bg-white hover:bg-gray-200 text-black font-bold py-3 rounded-xl transition-all active:scale-95">
+                <i class="fas fa-save mr-2"></i>Save
+            </button>
+            <button type="button" id="zenAddClose" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl transition-all active:scale-95">
+                Batal
+            </button>
+        </div>
+    </form>
+</section>
