@@ -1760,24 +1760,25 @@
 {% if menu == 'pdf' %}
 <!-- GALLERY PICKER (was PDF Builder) -->
 <section class="max-w-7xl mx-auto px-1 sm:px-0">
-    <header class="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <div>
-            <h1 class="text-2xl font-bold mb-1"><i class="fas fa-images mr-2"></i>Gallery</h1>
-            <p class="text-gray-400 text-sm">Pilih dan kelola desain gallery</p>
-        </div>
-
-    <div class="bg-gray-800 p-4 sm:p-5 rounded-2xl border border-gray-700 mb-6 sm:mb-8">
-        <div class="flex flex-col gap-2">
-            <div class="flex flex-wrap gap-2 items-center">
-                <span class="text-xs text-gray-500 uppercase font-bold mr-1">Filter:</span>
-                <button type="button" data-status-filter="all" class="status-filter-btn bg-white text-black px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Semua</button>
-                <button type="button" data-status-filter="draft" class="status-filter-btn bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Draft</button>
-                <button type="button" data-status-filter="proses" class="status-filter-btn bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Proses</button>
-                <button type="button" data-status-filter="finish" class="status-filter-btn bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Finish</button>
+    <header class="mb-6 sm:mb-8 flex flex-col gap-4">
+        <div class="flex items-center justify-between gap-3 flex-wrap">
+            <div>
+                <h1 class="text-2xl font-bold mb-1"><i class="fas fa-images mr-2"></i>Gallery</h1>
+                <p class="text-gray-400 text-sm">Pilih dan kelola desain gallery</p>
             </div>
-
         </div>
-    </div>
+        <div class="bg-gray-800 p-4 sm:p-5 rounded-2xl border border-gray-700">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                <span class="text-xs text-gray-500 uppercase font-bold">Filter:</span>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" data-status-filter="all" class="status-filter-btn bg-white text-black px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Semua</button>
+                    <button type="button" data-status-filter="draft" class="status-filter-btn bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Draft</button>
+                    <button type="button" data-status-filter="proses" class="status-filter-btn bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Proses</button>
+                    <button type="button" data-status-filter="finish" class="status-filter-btn bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Finish</button>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div id="image-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 pb-4 sm:pb-0">
         {% for d in designs %}
