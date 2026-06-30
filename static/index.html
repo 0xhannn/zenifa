@@ -360,7 +360,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: space-between;
-        width: 72px;
+        width: 90px;
         height: 28px;
         border-radius: 9999px;
         background: #4b5563;
@@ -368,7 +368,7 @@
         cursor: pointer;
         transition: background 220ms ease;
         text-decoration: none;
-        padding: 0 6px;
+        padding: 0 12px;
         box-sizing: border-box;
         overflow: hidden;
         vertical-align: middle;
@@ -514,7 +514,7 @@
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between h-16">
             <div class="flex items-center gap-2">
-                    <img src="/static/img/zenifa-logo-64.png" alt="Zenifa" class="w-10 h-10 rounded-lg">
+                    <img src="/static/img/zenifa-logo-64.png" alt="Zenifa" class="w-10 h-10">
                     <span class="text-xl font-bold tracking-tight text-white">Zenifa Design Department</span>
                 </div>
                 <div class="flex gap-6">
@@ -572,7 +572,7 @@
     <div class="sm:hidden bg-gray-800 border-b border-gray-700 sticky top-0 z-40">
         <div class="flex items-center justify-between px-4 h-14">
             <div class="flex items-center gap-2">
-                <img src="/static/img/zenifa-logo-64.png" alt="Zenifa" class="w-8 h-8 rounded-lg">
+                <img src="/static/img/zenifa-logo-64.png" alt="Zenifa" class="w-8 h-8">
                 <span class="text-base font-bold tracking-tight text-white">Zenifa</span>
             </div>
             <div class="flex items-center gap-3">
@@ -1482,13 +1482,12 @@
         {% if menu == 'welcome' %}
         <!-- WELCOME / SIGN -->
         <section class="min-h-[70vh] flex flex-col items-center justify-center text-center py-10">
-            <img src="/static/img/zenifa-logo-64.png" alt="Zenifa" class="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl shadow-2xl mb-6">
+            <img src="/static/img/zenifa-logo-64.png" alt="Zenifa" class="w-24 h-24 sm:w-32 sm:h-32 mb-6">
             <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">Zenifa Design Department</h1>
             <p class="text-gray-400 text-base sm:text-lg max-w-xl mb-8">Shoe design catalog.</p>
             <div class="flex flex-col sm:flex-row gap-3">
-                <a href="/add" class="bg-white hover:bg-gray-200 text-black font-bold px-6 py-3 rounded-xl transition inline-flex items-center justify-center"><i class="fas fa-plus-circle mr-2"></i>Add New Design</a>
-                <a href="/pdf" class="bg-gray-700 hover:bg-gray-600 text-white font-bold px-6 py-3 rounded-xl transition inline-flex items-center justify-center"><i class="fas fa-file-pdf mr-2"></i>Open Gallery</a>
-                <a href="/inwork" class="border border-gray-600 hover:border-gray-400 text-gray-200 hover:text-white font-bold px-6 py-3 rounded-xl transition inline-flex items-center justify-center"><i class="fas fa-images mr-2"></i>In Work</a>
+                <a href="/tasks" class="border border-gray-600 hover:border-gray-400 text-gray-200 hover:text-white font-bold px-6 py-3 rounded-xl transition inline-flex items-center justify-center"><i class="fas fa-list-check mr-2"></i>Task</a>
+                <a href="/pdf" class="border border-gray-600 hover:border-gray-400 text-gray-200 hover:text-white font-bold px-6 py-3 rounded-xl transition inline-flex items-center justify-center"><i class="fas fa-images mr-2"></i>Gallery</a>
             </div>
         </section>
         {% endif %}
