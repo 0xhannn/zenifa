@@ -1775,11 +1775,11 @@
                 <button type="button" data-status-filter="proses" class="status-filter-btn bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Proses</button>
                 <button type="button" data-status-filter="finish" class="status-filter-btn bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-xs font-bold min-h-[36px]">Finish</button>
             </div>
-            <div class="text-xs text-gray-400 text-right"><span id="selected-count">0</span> dipilih</div>
+
         </div>
     </div>
 
-    <div id="image-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 pb-4 sm:pb-0">
+    <div id="image-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 pb-4 sm:pb-0">
         {% for d in designs %}
         {% if d.image_path %}
         <div class="img-tile group relative cursor-pointer rounded-xl overflow-hidden border-2 border-gray-700 transition-all aspect-square active:scale-95" data-status="{{ d.status }}" data-image-path="{{ d.image_path }}" data-design-id="{{ d.id }}" data-model-name="{{ d.model_name }}">
@@ -1812,33 +1812,25 @@
     {% endif %}
 </section>
 
-<div id="pdf-action-bar" class="fixed left-0 right-0 bottom-16 sm:bottom-6 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 bg-gray-900 border-t sm:border border-gray-700 sm:rounded-2xl px-4 sm:px-5 py-3 shadow-2xl z-40 transition-all duration-300 translate-y-full sm:translate-y-32 opacity-0 pointer-events-none pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-    <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 max-w-3xl mx-auto">
-        <div class="text-sm text-white text-center sm:text-left"><i class="fas fa-check-circle mr-2 text-green-400"></i><span id="bar-count">0</span> gambar dipilih</div>
-        <div class="flex gap-2 sm:gap-3 sm:ml-auto">
-            
-            <button type="button" onclick="clearSelection()" class="bg-gray-800 sm:bg-transparent text-gray-400 hover:text-white text-xs transition px-3 py-2.5 sm:py-2 rounded-xl min-h-[44px]"><i class="fas fa-times sm:mr-1"></i><span class="hidden sm:inline">Batal</span></button>
-        </div>
-    </div>
-</div>
+
 </div>
 
 <script>
 function getSelectedImages(){return Array.from(document.querySelectorAll('.img-tile input[name=imgsel]:checked')).map(function(c){return c.value;});}
 function updateBar(){
     var sel=getSelectedImages();var n=sel.length;
-    var bar=document.getElementById('pdf-action-bar');
-    document.getElementById('selected-count').textContent=n;
-    document.getElementById('bar-count').textContent=n;
-    if(n>0){bar.classList.remove('translate-y-full','sm:translate-y-32','opacity-0','pointer-events-none');}
-    else{bar.classList.add('translate-y-full','sm:translate-y-32','opacity-0','pointer-events-none');}
+    var bar=document.getElementById('pdf-action-bar'); 
+    var sc=document.getElementById('selected-count');if(sc)sc.textContent=n;
+    var bc=document.getElementById('bar-count');if(bc)bc.textContent=n;
+    if(bar){if(n>0){bar.classList.remove('translate-y-full','sm:translate-y-32','opacity-0','pointer-events-none');}
+    else{bar.classList.add('translate-y-full','sm:translate-y-32','opacity-0','pointer-events-none');}}
 }
 function clearSelection(){
     document.querySelectorAll('.img-tile input[name=imgsel]:checked').forEach(function(cb){cb.checked=false;cb.closest('.img-tile').classList.remove('border-white');cb.closest('.img-tile').classList.add('border-gray-700');});
     updateBar();
 }
 document.querySelectorAll('.img-tile').forEach(function(tile){
-    tile.addEventListener('click',function(ev){if(ev.target.closest('a'))return;var cb=tile.querySelector('input[name=imgsel]');cb.checked=!cb.checked;if(cb.checked){tile.classList.remove('border-gray-700');tile.classList.add('border-white');}else{tile.classList.add('border-gray-700');tile.classList.remove('border-white');}updateBar();});
+    tile.addEventListener('click',function(ev){if(ev.target.closest('a'))return;var img=tile.querySelector('img');if(img)openLightbox(img.src,tile.dataset.modelName||'');});
 });
 document.querySelectorAll('.status-filter-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
@@ -1849,7 +1841,9 @@ document.querySelectorAll('.status-filter-btn').forEach(function(btn){
     });
 });
 function downloadPdf(mode){
-    var selected=getSelectedImages();var title=document.getElementById('pdf-title').value||'Zenifa Design Catalog';var notes=document.getElementById('pdf-notes').value||'';
+    var selected=getSelectedImages();if(selected.length===0){alert('Pilih minimal 1 gambar');return;}
+    var title=document.getElementById('pdf-title');title=title?title.value:'Zenifa Design Catalog';title=title||'Zenifa Design Catalog';
+    var notes=document.getElementById('pdf-notes');notes=notes?notes.value:'';
     if(selected.length===0){alert('Pilih minimal 1 gambar dulu');return;}
     if(mode==='preview'){
         var form=document.createElement('form');form.method='POST';form.action='/pdf/preview';form.target='_blank';
