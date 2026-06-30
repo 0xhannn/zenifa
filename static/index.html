@@ -507,9 +507,6 @@
                     <a href="/welcome" class="hover:text-white transition items-center {{ 'text-white font-bold' if menu == 'welcome' else 'text-gray-300' }}">
                         <i class="fas fa-house mr-1"></i> Home
                     </a>
-                    <a href="/add" class="hover:text-white transition items-center {{ 'text-white font-bold' if menu in ['home', 'edit'] else 'text-gray-300' }}">
-                        <i class="fas fa-plus-circle mr-1"></i> {{ 'Edit Design' if menu == 'edit' else 'Add New' }}
-                    </a>
                     <a href="/inwork" class="hover:text-white transition items-center {{ 'text-white font-bold' if menu == 'inwork' else 'text-gray-300' }}">
                         <i class="fas fa-images mr-1"></i> In Work
                     </a>
@@ -600,11 +597,6 @@
                 <span class="mob-tab-indicator"></span>
                 <i class="fas fa-house text-lg"></i>
                 <span class="text-[10px] font-semibold leading-none">Home</span>
-            </a>
-            <a href="/add" class="mob-tab flex flex-col items-center justify-center gap-0.5 transition relative {{ 'is-active' if menu in ['home', 'edit'] else '' }}">
-                <span class="mob-tab-indicator"></span>
-                <i class="fas {{ 'fa-edit' if menu == 'edit' else 'fa-plus-circle' }} text-lg"></i>
-                <span class="text-[10px] font-semibold leading-none">{{ 'Edit' if menu == 'edit' else 'Add' }}</span>
             </a>
             <a href="/inwork" class="mob-tab flex flex-col items-center justify-center gap-0.5 transition relative {{ 'is-active' if menu == 'inwork' else '' }}">
                 <span class="mob-tab-indicator"></span>
