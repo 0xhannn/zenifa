@@ -1520,9 +1520,11 @@
                 <h1 class="text-3xl font-bold mb-2">{{ 'In Work' if menu == 'inwork' else 'Finished Projects' }}</h1>
                 <p class="text-gray-400">Total: <span class="text-white font-bold">{{ designs|length }}</span> items</p>
             </div>
+            {% if menu == 'inwork' %}
             <button id="zenNewEntryBtn" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg border border-gray-700 text-sm transition cursor-pointer">
                 <i class="fas fa-plus mr-1"></i> New Entry
             </button>
+            {% endif %}
         </header>
 
         <!-- Status-based Sliders -->
