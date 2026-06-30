@@ -145,7 +145,7 @@ app = FastAPI()
 from starlette.middleware.sessions import SessionMiddleware
 import secrets as _secrets
 ADMIN_PIN = os.environ.get('ZENIFA_PIN', 'zenifa2026')
-APP_VERSION = "v1.5"
+APP_VERSION = "v1.7.1"
 
 @app.get("/__health__", include_in_schema=False)
 def __health__():
