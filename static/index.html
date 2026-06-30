@@ -1763,22 +1763,10 @@
     <header class="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
             <h1 class="text-2xl font-bold mb-1"><i class="fas fa-images mr-2"></i>Gallery</h1>
-            <p class="text-gray-400 text-sm">Pilih desain untuk generate PDF</p>
+            <p class="text-gray-400 text-sm">Pilih dan kelola desain gallery</p>
         </div>
-        <a href="/pdf/drafts" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2.5 rounded-xl text-sm transition self-start sm:self-auto inline-flex items-center min-h-[44px]"><i class="fas fa-archive mr-2"></i>Lihat Draft</a>
-    </header>
 
     <div class="bg-gray-800 p-4 sm:p-5 rounded-2xl border border-gray-700 mb-6 sm:mb-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-4">
-            <div>
-                <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Judul PDF</label>
-                <input type="text" id="pdf-title" value="Zenifa Design Catalog" placeholder="Judul dokumen..." class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 min-h-[44px] focus:ring-2 focus:ring-white outline-none text-white text-base">
-            </div>
-            <div>
-                <label class="block text-xs uppercase font-bold text-gray-500 mb-2">Keterangan / Notes</label>
-                <input type="text" id="pdf-notes" placeholder="Catatan tambahan (opsional)" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 min-h-[44px] focus:ring-2 focus:ring-white outline-none text-white text-base">
-            </div>
-        </div>
         <div class="flex flex-col gap-2">
             <div class="flex flex-wrap gap-2 items-center">
                 <span class="text-xs text-gray-500 uppercase font-bold mr-1">Filter:</span>
@@ -1828,8 +1816,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 max-w-3xl mx-auto">
         <div class="text-sm text-white text-center sm:text-left"><i class="fas fa-check-circle mr-2 text-green-400"></i><span id="bar-count">0</span> gambar dipilih</div>
         <div class="flex gap-2 sm:gap-3 sm:ml-auto">
-            <button type="button" onclick="downloadPdf('preview')" class="flex-1 sm:flex-none bg-white hover:bg-gray-200 text-black font-bold px-3 sm:px-4 py-2.5 sm:py-2 rounded-xl text-sm transition active:scale-95 min-h-[44px]"><i class="fas fa-eye sm:mr-1"></i><span class="hidden sm:inline">Preview PDF</span><span class="sm:hidden ml-1">Preview</span></button>
-            <button type="button" onclick="downloadPdf('draft')" class="flex-1 sm:flex-none bg-gray-700 hover:bg-gray-600 text-white font-bold px-3 sm:px-4 py-2.5 sm:py-2 rounded-xl text-sm transition active:scale-95 min-h-[44px]"><i class="fas fa-save sm:mr-1"></i><span class="hidden sm:inline">Simpan Draft</span><span class="sm:hidden ml-1">Draft</span></button>
+            
             <button type="button" onclick="clearSelection()" class="bg-gray-800 sm:bg-transparent text-gray-400 hover:text-white text-xs transition px-3 py-2.5 sm:py-2 rounded-xl min-h-[44px]"><i class="fas fa-times sm:mr-1"></i><span class="hidden sm:inline">Batal</span></button>
         </div>
     </div>
