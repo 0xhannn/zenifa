@@ -355,7 +355,7 @@
     </style>
 
     <style>
-      /* ===== Zenifa v1.3: Switch v2 — knob-only + Admin label below/Public Switch ===== */
+      /* ===== Zenifa v1.4: Footer fix + nav alignment — knob-only + Admin label below/Public Switch ===== */
       .zen-switch {
         position: relative;
         display: inline-flex;
@@ -497,29 +497,29 @@
 <body class="bg-gray-900 text-white font-sans min-h-screen" data-page="{{ menu }}">
     <!-- Top Navbar (desktop only) -->
     <nav class="hidden sm:block bg-gray-800 border-b border-gray-700 sticky top-0 z-40">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 py-2">
             <div class="flex items-center justify-between h-16">
             <div class="flex items-center gap-2">
                     <img src="/static/img/zenifa-logo-64.png" alt="Zenifa" class="w-10 h-10">
                     <span class="text-xl font-bold tracking-tight text-white">Zenifa Design Department</span>
                 </div>
-                <div class="flex gap-6">
-                    <a href="/welcome" class="hover:text-white transition {{ 'text-white font-bold' if menu == 'welcome' else 'text-gray-300' }}">
+                <div class="flex items-center gap-6">
+                    <a href="/welcome" class="hover:text-white transition items-center {{ 'text-white font-bold' if menu == 'welcome' else 'text-gray-300' }}">
                         <i class="fas fa-house mr-1"></i> Home
                     </a>
-                    <a href="/add" class="hover:text-white transition {{ 'text-white font-bold' if menu in ['home', 'edit'] else 'text-gray-300' }}">
+                    <a href="/add" class="hover:text-white transition items-center {{ 'text-white font-bold' if menu in ['home', 'edit'] else 'text-gray-300' }}">
                         <i class="fas fa-plus-circle mr-1"></i> {{ 'Edit Design' if menu == 'edit' else 'Add New' }}
                     </a>
-                    <a href="/inwork" class="hover:text-white transition {{ 'text-white font-bold' if menu == 'inwork' else 'text-gray-300' }}">
+                    <a href="/inwork" class="hover:text-white transition items-center {{ 'text-white font-bold' if menu == 'inwork' else 'text-gray-300' }}">
                         <i class="fas fa-images mr-1"></i> In Work
                     </a>
-                    <a href="/finished" class="hover:text-white transition {{ 'text-white font-bold' if menu == 'finished' else 'text-gray-300' }}">
+                    <a href="/finished" class="hover:text-white transition items-center {{ 'text-white font-bold' if menu == 'finished' else 'text-gray-300' }}">
                         <i class="fas fa-check-circle mr-1"></i> Finished
                     </a>
-                    <a href="/tasks" class="hover:text-white transition {{ 'text-white font-bold' if menu == 'tasks' else 'text-gray-300' }}">
+                    <a href="/tasks" class="hover:text-white transition items-center {{ 'text-white font-bold' if menu == 'tasks' else 'text-gray-300' }}">
                         <i class="fas fa-list-check mr-1"></i> Tasks
                     </a>
-                    <a href="/pdf" class="hover:text-white transition {{ 'text-white font-bold' if menu in ['pdf','pdf_drafts'] else 'text-gray-300' }}">
+                    <a href="/pdf" class="hover:text-white transition items-center {{ 'text-white font-bold' if menu in ['pdf','pdf_drafts'] else 'text-gray-300' }}">
                         <i class="fas fa-file-pdf mr-1"></i> Gallery
                     </a>
                     {% if pin_ok %}
@@ -1935,7 +1935,7 @@ function deletePdfImage(id,el){
     </div>
 
     <footer class="hidden sm:block py-10 text-center text-gray-600 text-xs uppercase tracking-widest">
-        Zenifa Design Department &bull; 2026 &bull; Design Data Vault
+        
     </footer>
 
     <!-- Multi-Slider JavaScript -->
@@ -2387,7 +2387,7 @@ document.querySelectorAll('.zen-pin-wrap').forEach(function(wrap){
 
   /* Hide footer on mobile bottom tab bar overlap (bottom tab is at bottom:0). */
   @media (max-width: 639px) {
-    .zen-footer { bottom: calc(56px + max(0.5rem, env(safe-area-inset-bottom)) + 8px); }
+    .zen-footer { bottom: calc(56px + max(0.5rem, env(safe-area-inset-bottom)) + 16px); }
   }
 
   /* Modal */
