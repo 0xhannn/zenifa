@@ -359,49 +359,34 @@
         position: relative;
         display: inline-flex;
         align-items: center;
-        justify-content: space-between;
-        width: 68px;
-        height: 28px;
+        justify-content: center;
+        width: 52px;
+        height: 22px;
         border-radius: 9999px;
         background: #4b5563;
         border: 1px solid rgba(255,255,255,0.1);
         cursor: pointer;
         transition: background 220ms ease;
         text-decoration: none;
-        padding: 0 12px;
+        padding: 0 4px;
         box-sizing: border-box;
         overflow: hidden;
         vertical-align: middle;
       }
       .zen-switch:hover { filter: brightness(1.1); }
       .zen-switch.is-on { background: #22c55e; }
-      .zen-switch-label {
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: rgba(255,255,255,0.95);
-        line-height: 1;
-        user-select: none;
-        z-index: 1;
-        transition: opacity 200ms ease;
-      }
-      .zen-switch-label-on  { opacity: 0; }
-      .zen-switch-label-off { opacity: 0.8; }
-      .zen-switch.is-on .zen-switch-label-on  { opacity: 1; }
-      .zen-switch.is-on .zen-switch-label-off { opacity: 0; }
       .zen-switch-knob {
         position: absolute;
         top: 2px;
         left: 2px;
-        width: 22px;
-        height: 22px;
+        width: 18px;
+        height: 18px;
         border-radius: 9999px;
         background: #fff;
         box-shadow: 0 1px 3px rgba(0,0,0,0.4);
         transition: left 220ms cubic-bezier(0.4,0,0.2,1);
       }
-      .zen-switch.is-on .zen-switch-knob { left: calc(100% - 24px); }
+      .zen-switch.is-on .zen-switch-knob { left: calc(100% - 20px); }
       /* mobile compact */
       .zen-switch-sm { width: 48px; height: 24px; padding: 0 4px; }
       .zen-switch-sm .zen-switch-knob { width: 18px; height: 18px; top: 2px; left: 2px; }
