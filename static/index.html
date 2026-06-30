@@ -2349,29 +2349,6 @@ document.querySelectorAll('.zen-pin-wrap').forEach(function(wrap){
     document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape' && !m.hidden) close(); });
 })();
 
-/* New Entry modal */
-(function(){
-    var overlay = document.getElementById('zenAddModalOverlay');
-    var btn = document.getElementById('zenNewEntryBtn');
-    var closeBtn = document.getElementById('zenAddModalClose');
-    var cancelBtn = document.getElementById('zenAddCancel');
-    var form = document.getElementById('zenAddForm');
-    function open() { if (overlay) overlay.hidden = false; }
-    function close() { if (overlay) overlay.hidden = true; }
-    if (btn) btn.addEventListener('click', open);
-    if (closeBtn) closeBtn.addEventListener('click', close);
-    if (cancelBtn) cancelBtn.addEventListener('click', close);
-    if (overlay) {
-        overlay.addEventListener('click', function(e){ if (e.target === overlay) close(); });
-        document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !overlay.hidden) close(); });
-    }
-    if (form) {
-        form.addEventListener('submit', function(e){
-            e.preventDefault();
-            fetch('/add', {method:'POST', body:new FormData(form)}).then(function(){ close(); location.reload(); });
-        });
-    }
-})();
 </script>
 
 <style>
@@ -2507,6 +2484,32 @@ document.querySelectorAll('.zen-pin-wrap').forEach(function(wrap){
     </form>
   </div>
 </div>
+
+<script>
+/* New Entry modal */
+(function(){
+    var overlay = document.getElementById('zenAddModalOverlay');
+    var btn = document.getElementById('zenNewEntryBtn');
+    var closeBtn = document.getElementById('zenAddModalClose');
+    var cancelBtn = document.getElementById('zenAddCancel');
+    var form = document.getElementById('zenAddForm');
+    function open() { if (overlay) overlay.hidden = false; }
+    function close() { if (overlay) overlay.hidden = true; }
+    if (btn) btn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (cancelBtn) cancelBtn.addEventListener('click', close);
+    if (overlay) {
+        overlay.addEventListener('click', function(e){ if (e.target === overlay) close(); });
+        document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !overlay.hidden) close(); });
+    }
+    if (form) {
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            fetch('/add', {method:'POST', body:new FormData(form)}).then(function(){ close(); location.reload(); });
+        });
+    }
+})();
+</script>
 
 </body>
 
